@@ -1,0 +1,33 @@
+{
+    "name": "tianyong90/lucksdk",
+    "description": "纳客会员管理软件对接开发SDK",
+    "keywords": [
+        "lucksdk",
+        "lucksoft"
+    ],
+    "license": "MIT",
+    "require": {
+        "php":">=5.3",
+        "ext-mcrypt": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.0"
+    },
+    "authors": [
+        {
+            "name": "tianyong90",
+            "email": "412039588@qq.com"
+        }
+    ],
+    "minimum-stability" : "dev",
+    "autoload": {
+        "psr-4": {
+            "Tianyong90\\LuckSDK\\": "src/LuckSDK/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tianyong90\\LuckSDK\\Tests\\": "tests/"
+        }
+    }
+}
