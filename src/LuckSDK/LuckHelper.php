@@ -65,13 +65,13 @@ class LuckHelper
 
     public $option = array();
 
-    function __construct($option, Encrypter $cncrypter)
+    function __construct($option)
     {
         //公众号设置的纳客接口地址
-        $this->interfaceUrl = $option['url'];
+        $this->interfaceUrl = $option['luck_url'];
 
         //公众号设置的纳客接口密钥
-        $this->interfaceKey = $option['interface_key'];
+        $this->interfaceKey = $option['luck_key'];
 
         //获取设置的纳客接口版本
         $this->luckVersion = $option['luck_version'];
@@ -88,7 +88,8 @@ class LuckHelper
             $this->errorCode = 'WX4';
         }
 
-        $this->encrypter = $cncrypter;
+        //加解密器
+        $this->encrypter = new Encrypter($option['luck_key']);
 
     }
 
@@ -97,23 +98,25 @@ class LuckHelper
      *
      * @param string $_method 接口方法名
      */
-    public function callnake($_method, $data)
+    public function callnake($_method, $data = array())
     {
         //实际请求地址
         $url = trim($this->interfaceUrl, '/ \/') . "/Interface/GeneralInterfaceHandler.ashx";
 
         //请求方法名加入到参数中
-        $data['do'] = $this->encrypter->encrypt($_method);
+        $data['do'] = $_method;
 
         //如果是商盟旗舰版，则参数中加入店铺ID
         if ($this->luckVersion === self::LUCK_VERSION_ULTIMATE) {
-            $data['ShopID'] = $this->encrypter->encrypt($this->shopId);
+            $data['ShopID'] = $this->shopId;
         }
 
-        //参数加密
+
+        //数据
         foreach ($data as $key => $value) {
             $data[$key] = $this->encrypter->encrypt($value);
         }
+
         //企业代码不加密
         $data['CompCode'] = $this->companyCode;
 
@@ -138,8 +141,9 @@ class LuckHelper
             if ($arr['status'] !== 1) {
                 throw new Exception($arr['msg'], $arr['msg']);
             }
+            return $arr;
         } else {
-            throw new Exception('接口请求数据失败');
+            throw new Exception('请求接口数据失败', 50005);
         }
     }
 }
