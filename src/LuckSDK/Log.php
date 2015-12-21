@@ -26,6 +26,11 @@ class Log
 
     public function info()
     {
-        
+
+    }
+
+    public function debug()
+    {
+      
     }
 }
