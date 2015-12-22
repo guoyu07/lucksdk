@@ -19,7 +19,7 @@ namespace Tianyong90\LuckSDK;
  */
 class LuckHelper
 {
-    const LUCK_VERSION_CLISSIC = 1;  //经典版
+    const LUCK_VERSION_CLASSIC = 1;  //经典版
     const LUCK_VERSION_POPULAR = 2;  //商盟大众版
     const LUCK_VERSION_ULTIMATE = 3;  //商盟旗舰版
     const LUCK_VERSION_ENTERPRISE = 4;  //企业版
