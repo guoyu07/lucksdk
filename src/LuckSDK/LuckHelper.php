@@ -87,22 +87,21 @@ class LuckHelper
 
         //获取设置的纳客接口版本
         $this->luckVersion = $option['luck_version'];
+
         //企业代码
+        if ($this->luckVersion == self::LUCK_VERSION_ENTERPRISE && empty($option['company_code'])) {
+            throw new Exception('', 50004);
+        }
         $this->companyCode = $option['company_code'];
 
-        if ($this->luckVersion == self::LUCK_VERSION_ENTERPRISE && empty($this->companyCode)) {
-            throw new Exception('what the fuck');
-        }
-
         //店铺号，针对商盟旗舰版
-        $this->shopId = $option['shop_id'];
-        if ($this->luckVersion == self::LUCK_VERSION_ULTIMATE && empty($this->shopId)) {
-            $this->errorCode = 'WX4';
+        if ($this->luckVersion == self::LUCK_VERSION_ULTIMATE && empty($option['shop_id'])) {
+            throw new Exception('', 50005);
         }
+        $this->shopId = $option['shop_id'];
 
         //加解密器
         $this->encrypter = new Encrypter($option['luck_key']);
-
     }
 
     /**
@@ -110,7 +109,7 @@ class LuckHelper
      *
      * @param string $_method 接口方法名
      */
-    public function callnake($_method, $data = array())
+    public function callnake($_method, array $data = array())
     {
         //实际请求地址
         $url = trim($this->interfaceUrl, '/ \/') . "/Interface/GeneralInterfaceHandler.ashx";
@@ -155,7 +154,7 @@ class LuckHelper
             }
             return $arr;
         } else {
-            throw new Exception('请求接口数据失败', 50005);
+            throw new Exception('请求接口数据失败', 50006);
         }
     }
 }
