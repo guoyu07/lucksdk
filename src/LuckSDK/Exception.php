@@ -1,6 +1,6 @@
 <?php
 /**
- * Exception.php
+ * Exception.php.
  *
  * Part of Tianyong90\LuckSDK.
  *
@@ -8,17 +8,16 @@
  * file that was distributed with this source code.
  *
  * @author    tianyong90 <412039588@qq.com>
- * @copyright 2015 tianyong90 <412039588@qq.com>
+ * @copyright 2016 tianyong90 <412039588@qq.com>
+ *
  * @link      https://github.com/tianyong90
  */
-
 namespace Tianyong90\LuckSDK;
 
 use Exception as BaseException;
 
 class Exception extends BaseException
 {
-
     protected $errors = array(
         '00' => '操作成功',
 
@@ -136,9 +135,11 @@ class Exception extends BaseException
      */
     public function __construct($message, $code = null)
     {
+        var_dump($message);
+
         $message = $this->errors[$code] ?: $message;
 
-        $message = "[LuckSDK]{$message}";
+        $message = "[LuckSDK]:{$message}";
 
         parent::__construct($message, $code);
     }

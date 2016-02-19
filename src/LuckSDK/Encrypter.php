@@ -1,6 +1,6 @@
 <?php
 /**
- * Encrypter.php
+ * Encrypter.php.
  *
  * Part of Tianyong90\LuckSDK.
  *
@@ -8,14 +8,19 @@
  * file that was distributed with this source code.
  *
  * @author    tianyong90 <412039588@qq.com>
- * @copyright 2015 tianyong90 <412039588@qq.com>
+ * @copyright 2016 tianyong90 <412039588@qq.com>
+ *
  * @link      https://github.com/tianyong90
  */
-
 namespace Tianyong90\LuckSDK;
 
 class Encrypter
 {
+    /**
+     * 加/解密密钥.
+     *
+     * @var string
+     */
     private $key = '';
 
     /**
@@ -23,16 +28,17 @@ class Encrypter
      *
      * @param string $key
      */
-    function __construct($key)
+    public function __construct($key)
     {
         if (empty($key)) {
             throw new Exception('缺少接口密钥');
         }
+
         $this->key = base64_encode($key);
     }
 
     /**
-     *加密
+     * 加密.
      *
      * @param string $value
      *
@@ -47,15 +53,16 @@ class Encrypter
         $ret = base64_encode(mcrypt_generic($td, $value));
         mcrypt_generic_deinit($td);
         mcrypt_module_close($td);
+
         return $ret;
     }
 
     /**
-     *解密
+     * 解密.
      *
      * @param string $value
      *
-     * @return string>
+     * @return string
      */
     public function decrypt($value)
     {
@@ -66,6 +73,7 @@ class Encrypter
         $ret = $this->UnPaddingPKCS7($ret);
         mcrypt_generic_deinit($td);
         mcrypt_module_close($td);
+
         return $ret;
     }
 
@@ -74,6 +82,7 @@ class Encrypter
         $block_size = mcrypt_get_block_size('tripledes', 'cbc');
         $padding_char = $block_size - (strlen($data) % $block_size);
         $data .= str_repeat(chr($padding_char), $padding_char);
+
         return $data;
     }
 
@@ -86,6 +95,7 @@ class Encrypter
         if (strspn($text, chr($pad), strlen($text) - $pad) != $pad) {
             return false;
         }
+
         return substr($text, 0, -1 * $pad);
     }
 }

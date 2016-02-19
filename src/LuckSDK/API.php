@@ -1,6 +1,6 @@
 <?php
 /**
- * API.php
+ * API.php.
  *
  * Part of Tianyong90\LuckSDK.
  *
@@ -8,19 +8,19 @@
  * file that was distributed with this source code.
  *
  * @author    tianyong90 <412039588@qq.com>
- * @copyright 2015 tianyong90 <412039588@qq.com>
+ * @copyright 2016 tianyong90 <412039588@qq.com>
+ *
  * @link      https://github.com/tianyong90
  */
-
 namespace Tianyong90\LuckSDK;
 
 class API
 {
     const API_TEST = 'Test';
     const API_MEM_REG = 'MemReg';  //会员注册
-    const API_MEM_UPDATE='MemUpdata';  //修改会员信息
-    const API_MEM_DEL='MemDel';  //删除会员信息
-    const API_MEM_BIND='MemBind';  //会员绑定
+    const API_MEM_UPDATE = 'MemUpdata';  //修改会员信息
+    const API_MEM_DEL = 'MemDel';  //删除会员信息
+    const API_MEM_BIND = 'MemBind';  //会员绑定
 
     const API_UPDATE_PASSWORD = 'UpdatePassword';  //修改密码
     const API_UPDATE_STATE = 'UpdateState';  //挂失锁定
@@ -31,7 +31,7 @@ class API
     const API_GET_MEMINFO = 'GetMemInfo';  //获取会员信息
 
     const API_GET_DISCOUNTMONEY = 'GetDiscountMoney';  //获取应付金额
-    const API_QUICK_CONSUME='QuickConsume';
+    const API_QUICK_CONSUME = 'QuickConsume';
 
     const API_ORDER_HISTORY = 'OrderHistory';  //消费记录
     const API_ORDER_DETAIL = 'OrderDetail';  //音箱消费记录详情

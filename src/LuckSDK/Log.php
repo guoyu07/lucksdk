@@ -1,6 +1,6 @@
 <?php
 /**
- * Log.php
+ * Log.php.
  *
  * Part of Tianyong90\LuckSDK.
  *
@@ -8,29 +8,51 @@
  * file that was distributed with this source code.
  *
  * @author    tianyong90 <412039588@qq.com>
- * @copyright 2015 tianyong90 <412039588@qq.com>
+ * @copyright 2016 tianyong90 <412039588@qq.com>
+ *
  * @link      https://github.com/tianyong90
  */
-
 namespace Tianyong90\LuckSDK;
 
 /**
- * 日志类
+ * 日志.
  */
 class Log
 {
-    function __construct()
-    {
+    /**
+     * 日志文件路径.
+     *
+     * @var string
+     */
+    private static $logPath;
 
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->logPath = get_sys_temp_path();
     }
 
-    public function info()
+    public static function info($logData)
     {
+        self::writeLog('fuckit');
 
+        // $this->writeLog('fuckit');
     }
 
-    public function debug()
+    public static function debug()
     {
-      
+    }
+
+    private static function writeLog($content, $level = 'info')
+    {
+        $data = sprintf('%s [%s]: %s', date('Y-m-d H:i:s'), strtoupper($level), $content);
+
+        echo $data;
+
+        // $log = fopen($this->filePath, 'aw');
+        // fwrite($log, $content);
+        // fclose($log);
     }
 }
