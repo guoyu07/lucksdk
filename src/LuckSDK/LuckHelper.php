@@ -76,9 +76,9 @@ class LuckHelper
     /**
      * 加/解密器.
      *
-     * @var Encrypter
+     * @var Encryptor
      */
-    private $encrypter;
+    private $encryptor;
 
     /**
      * SDK 参数.
@@ -116,7 +116,7 @@ class LuckHelper
         $this->shopId = $option['shop_id'];
 
         //加解密器
-        $this->encrypter = new Encrypter($option['luck_key']);
+        $this->encryptor = new Encryptor($option['luck_key']);
 
         $this->http = new Http();
     }
@@ -142,7 +142,7 @@ class LuckHelper
 
         //数据
         foreach ($data as $key => $value) {
-            $data[$key] = $this->encrypter->encrypt($value);
+            $data[$key] = $this->encryptor->encrypt($value);
         }
 
         //企业代码不加密

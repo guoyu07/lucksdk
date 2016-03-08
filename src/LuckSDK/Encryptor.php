@@ -14,7 +14,7 @@
  */
 namespace Tianyong90\LuckSDK;
 
-class Encrypter
+class Encryptor
 {
     /**
      * 加/解密密钥.
