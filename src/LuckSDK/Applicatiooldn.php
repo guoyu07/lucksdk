@@ -13,11 +13,13 @@
  * @link      https://github.com/tianyong90
  */
 namespace Tianyong90\LuckSDK;
+use GuzzleHttp\Client;
+
 
 /**
  * 调用纳客接口的帮助类.
  */
-class LuckHelper
+class Application
 {
     const LUCK_VERSION_CLASSIC = 1; //经典版
     const LUCK_VERSION_POPULAR = 2; //商盟大众版
@@ -118,7 +120,12 @@ class LuckHelper
         //加解密器
         $this->encryptor = new Encryptor($option['luck_key']);
 
-        $this->http = new Http();
+        $this->http = new Client();
+    }
+
+    public function __call()
+    {
+
     }
 
     /**
