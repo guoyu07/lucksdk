@@ -19,7 +19,7 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-namespace Tianyong90\Support;
+namespace Tianyong90\LuckSDK\Support;
 
 use Monolog\Handler\ErrorLogHandler;
 use Monolog\Handler\NullHandler;
@@ -91,7 +91,7 @@ class Log
      */
     private static function createDefaultLogger()
     {
-        $log = new Logger('EasyWeChat');
+        $log = new Logger('LuckSDK');
 
         if (defined('PHPUNIT_RUNNING')) {
             $log->pushHandler(new NullHandler());

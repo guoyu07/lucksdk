@@ -18,7 +18,7 @@
  * @link      https://github.com/overtrue
  * @link      http://overtrue.me
  */
-namespace Tianyong90\Support;
+namespace Tianyong90\LuckSDK\Support;
 
 /**
  * Class XML.

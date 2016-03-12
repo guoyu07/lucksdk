@@ -19,7 +19,7 @@
  * @link      http://overtrue.me
  * @link      https://github.com/laravel/framework/blob/4.2/src/Illuminate/Support/Arr.php
  */
-namespace Tianyong90\Support;
+namespace Tianyong90\LuckSDK\Support;
 
 use Closure;
 

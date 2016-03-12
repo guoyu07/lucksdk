@@ -18,9 +18,9 @@
  * @link      https://github.com/overtrue
  * @link      http://overtrue.me
  */
-namespace Tianyong90\Core\Exceptions;
+namespace Tianyong90\LuckSDK\Core\Exceptions;
 
-use Tianyong90\Core\Exception;
+use Tianyong90\LuckSDK\Core\Exception;
 
 /**
  * Class InvalidArgumentException.

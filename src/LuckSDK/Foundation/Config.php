@@ -14,7 +14,7 @@
  */
 namespace Tianyong90\LuckSDK\Foundation;
 
-use Tianyong90\Support\Collection;
+use Tianyong90\LuckSDK\Support\Collection;
 
 class Config extends Collection
 {

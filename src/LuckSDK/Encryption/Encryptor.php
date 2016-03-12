@@ -12,7 +12,7 @@
  *
  * @link      https://github.com/tianyong90
  */
-namespace Tianyong90\LuckSDK;
+namespace Tianyong90\LuckSDK\Encryption;
 
 class Encryptor
 {
@@ -31,7 +31,7 @@ class Encryptor
     public function __construct($key)
     {
         if (empty($key)) {
-            throw new Exception('缺少接口密钥');
+            throw new \Exception('缺少接口密钥');
         }
 
         $this->key = base64_encode($key);

@@ -19,11 +19,11 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-namespace Tianyong90\Core;
+namespace Tianyong90\LuckSDK\Core;
 
-use Tianyong90\Core\Exceptions\HttpException;
-use Tianyong90\Support\Collection;
-use Tianyong90\Support\Log;
+use Tianyong90\LuckSDK\Core\Exceptions\HttpException;
+use Tianyong90\LuckSDK\Support\Collection;
+use Tianyong90\LuckSDK\Support\Log;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\Psr7\Uri;
 use Psr\Http\Message\RequestInterface;

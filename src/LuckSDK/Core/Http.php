@@ -19,10 +19,10 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-namespace Tianyong90\Core;
+namespace Tianyong90\LuckSDK\Core;
 
-use Tianyong90\Core\Exceptions\HttpException;
-use Tianyong90\Support\Log;
+use Tianyong90\LuckSDK\Core\Exceptions\HttpException;
+use Tianyong90\LuckSDK\Support\Log;
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\HandlerStack;
 use Psr\Http\Message\ResponseInterface;
@@ -213,16 +213,13 @@ class Http
      *
      * @return mixed
      *
-     * @throws \Tianyong90\Core\Exceptions\HttpException
+     * @throws \Tianyong90\LuckSDK\Core\Exceptions\HttpException
      */
     public function parseJSON($body)
     {
         if ($body instanceof ResponseInterface) {
             $body = $body->getBody();
         }
-
-        // XXX: json maybe contains special chars. So, let's FUCK the WeChat API developers ...
-        $body = $this->fuckTheWeChatInvalidJSON($body);
 
         if (empty($body)) {
             return false;

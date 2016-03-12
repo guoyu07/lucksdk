@@ -27,14 +27,6 @@ use Tianyong90\LuckSDK\Support\Log;
 class Application extends Container
 {
 
-    /*
-     * Service Providers.
-     *
-     * @var array
-     */
-    protected $providers = [
-        ServiceProviders\EncryptorServiceProvider::class,
-    ];
 
     /**
      * Constructor.
