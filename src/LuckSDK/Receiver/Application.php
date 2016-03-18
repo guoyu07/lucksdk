@@ -24,7 +24,7 @@ use Tianyong90\LuckSDK\Support\Log;
 /**
  * 调用纳客接口的帮助类.
  */
-class Application extends Container
+class Receiver
 {
 
 
@@ -35,7 +35,6 @@ class Application extends Container
      */
     public function __construct($config)
     {
-        parent::__construct();
 
         $this['config'] = function () use ($config) {
             return new Config($config);

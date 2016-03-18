@@ -12,7 +12,7 @@
  *
  * @link      https://github.com/tianyong90
  */
-namespace Tianyong90\LuckSDK;
+namespace Tianyong90\LuckSDK\Core;
 
 class API
 {

@@ -13,6 +13,7 @@
  * @link      https://github.com/tianyong90
  */
 namespace Tianyong90\LuckSDK;
+
 use GuzzleHttp\Client;
 
 
@@ -137,7 +138,7 @@ class Application
     public function callnake($_method, array $data = array())
     {
         //实际请求地址
-        $url = trim($this->interfaceUrl, '/ \/').'/Interface/GeneralInterfaceHandler.ashx';
+        $url = trim($this->interfaceUrl, '/ \/') . '/Interface/GeneralInterfaceHandler.ashx';
 
         //请求方法名加入到参数中
         $data['do'] = $_method;

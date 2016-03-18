@@ -16,7 +16,7 @@ namespace Tianyong90\LuckSDK;
 
 use Exception as BaseException;
 
-class Exception extends BaseException
+class LuckException extends BaseException
 {
     protected $errors = array(
         '00' => '操作成功',

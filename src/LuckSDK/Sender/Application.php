@@ -17,139 +17,83 @@ namespace Tianyong90\LuckSDK\Foundation;
 use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
-use Pimple\Container;
 use Symfony\Component\HttpFoundation\Request;
+use Tianyong90\LuckSDK\Core\Http;
+use Tianyong90\LuckSDK\Encryption\Encryptor;
+use Tianyong90\LuckSDK\Support\Collection;
 use Tianyong90\LuckSDK\Support\Log;
 
 /**
  * 调用纳客接口的帮助类.
  */
-class Application extends Container
+class Sender
 {
+    /**
+     * @var Encryptor
+     */
+    private $encryptor;
 
+    /**
+     * @var array
+     */
+    private $dataToSend;
+
+    private $http;
 
     /**
      * Constructor.
      *
      * @param array $config
      */
-    public function __construct($config)
+    public function __construct(Encryptor $encryptor, Http $http)
     {
-        parent::__construct();
+        $this->encryptor = $encryptor;
 
-        $this['config'] = function () use ($config) {
-            return new Config($config);
-        };
-
-        if ($this['config']['debug']) {
-            error_reporting(E_ALL);
-        }
-
-        $this->registerProviders();
-        $this->registerBase();
-        $this->initializeLogger();
-
-        Log::debug('Current configuration:', $config);
+        $this->http = $http;
     }
 
     /**
-     * Add a provider.
+     * set encryptor.
      *
-     * @param string $provider
-     *
-     * @return Application
+     * @param Encryptor $encryptor
      */
-    public function addProvider($provider)
+    public function setEncryptor(Encryptor $encryptor)
     {
-        array_push($this->providers, $provider);
-
-        return $this;
+        $this->encryptor = $encryptor;
     }
 
     /**
-     * Set providers.
+     * get encryptor.
      *
-     * @param array $providers
+     * @return Encryptor
      */
-    public function setProviders(array $providers)
+    public function getEncryptor()
     {
-        $this->providers = [];
-
-        foreach ($providers as $provider) {
-            $this->addProvider($provider);
-        }
+        return $this->encryptor;
     }
 
     /**
-     * Return all providers.
+     * set data to send.
+     *
+     * @param array $data
+     */
+    public function setData(array $data)
+    {
+        $this->dataToSend = $data;
+    }
+
+    /**
+     * get data to send.
      *
      * @return array
      */
-    public function getProviders()
+    public function getData()
     {
-        return $this->providers;
+        return $this->dataToSend;
     }
 
-    /**
-     * Magic get access.
-     *
-     * @param string $id
-     *
-     * @return mixed
-     */
-    public function __get($id)
+    public function send()
     {
-        return $this->offsetGet($id);
-    }
-
-    /**
-     * Magic set access.
-     *
-     * @param string $id
-     * @param mixed  $value
-     */
-    public function __set($id, $value)
-    {
-        $this->offsetSet($id, $value);
-    }
-
-    /**
-     * Register providers.
-     */
-    private function registerProviders()
-    {
-        foreach ($this->providers as $provider) {
-            $this->register(new $provider());
-        }
-    }
-
-    /**
-     * Register basic providers.
-     */
-    private function registerBase()
-    {
-        $this['request'] = function () {
-            return Request::createFromGlobals();
-        };
-
-//        $this['cache'] = function () {
-//            return new FilesystemCache(sys_get_temp_dir());
-//        };
-    }
-
-    /**
-     * Initialize logger.
-     */
-    private function initializeLogger()
-    {
-        $logger = new Logger('lucksdk');
-
-        if (!$this['config']['debug'] || defined('PHPUNIT_RUNNING')) {
-            $logger->pushHandler(new NullHandler());
-        } elseif ($logFile = $this['config']['log.file']) {
-            $logger->pushHandler(new StreamHandler($logFile, $this['config']->get('log.level', Logger::WARNING)));
-        }
-
-        Log::setLogger($logger);
+//        $this->http->post();
     }
 }

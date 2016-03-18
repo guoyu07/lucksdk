@@ -37,16 +37,9 @@ abstract class AbstractAPI
     /**
      * Http instance.
      *
-     * @var \Tianyong90\Core\Http
+     * @var \Tianyong90\LuckSDK\Core\Http
      */
     protected $http;
-
-    /**
-     * The request token.
-     *
-     * @var \Tianyong90\Core\AccessToken
-     */
-    protected $accessToken;
 
     const GET = 'get';
     const POST = 'post';
@@ -54,18 +47,15 @@ abstract class AbstractAPI
 
     /**
      * Constructor.
-     *
-     * @param \Tianyong90\Core\AccessToken $accessToken
      */
-    public function __construct(AccessToken $accessToken)
+    public function __construct()
     {
-        $this->setAccessToken($accessToken);
     }
 
     /**
      * Return the http instance.
      *
-     * @return \Tianyong90\Core\Http
+     * @return \Tianyong90\LuckSDK\Core\Http
      */
     public function getHttp()
     {
@@ -83,7 +73,7 @@ abstract class AbstractAPI
     /**
      * Set the http instance.
      *
-     * @param \Tianyong90\Core\Http $http
+     * @param \Tianyong90\LuckSDK\Core\Http $http
      *
      * @return $this
      */
@@ -95,36 +85,12 @@ abstract class AbstractAPI
     }
 
     /**
-     * Return the current accessToken.
-     *
-     * @return \Tianyong90\Core\AccessToken
-     */
-    public function getAccessToken()
-    {
-        return $this->accessToken;
-    }
-
-    /**
-     * Set the request token.
-     *
-     * @param \Tianyong90\Core\AccessToken $accessToken
-     *
-     * @return $this
-     */
-    public function setAccessToken(AccessToken $accessToken)
-    {
-        $this->accessToken = $accessToken;
-
-        return $this;
-    }
-
-    /**
      * Parse JSON from response and check error.
      *
      * @param string $method
      * @param array  $args
      *
-     * @return \Tianyong90\Support\Collection
+     * @return \Tianyong90\LuckSDK\Support\Collection
      */
     public function parseJSON($method, array $args)
     {
@@ -148,29 +114,6 @@ abstract class AbstractAPI
         $this->http->addMiddleware($this->retryMiddleware());
         // access token
         $this->http->addMiddleware($this->accessTokenMiddleware());
-    }
-
-    /**
-     * Attache access token to request query.
-     *
-     * @return \Closure
-     */
-    protected function accessTokenMiddleware()
-    {
-        return function (callable $handler) {
-            return function (RequestInterface $request, array $options) use ($handler) {
-                if (!$this->accessToken) {
-                    return $handler($request, $options);
-                }
-
-                $field = $this->accessToken->getQueryName();
-                $token = $this->accessToken->getToken();
-
-                $request = $request->withUri(Uri::withQueryValue($request->getUri(), $field, $token));
-
-                return $handler($request, $options);
-            };
-        };
     }
 
     /**
@@ -223,7 +166,7 @@ abstract class AbstractAPI
      *
      * @param array $contents
      *
-     * @throws \Tianyong90\Core\Exceptions\HttpException
+     * @throws \Tianyong90\LuckSDK\Core\Exceptions\HttpException
      */
     protected function checkAndThrow(array $contents)
     {
