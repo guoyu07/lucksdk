@@ -135,8 +135,6 @@ class Exception extends BaseException
      */
     public function __construct($message, $code = null)
     {
-        var_dump($message);
-
         $message = $this->errors[$code] ?: $message;
 
         $message = "[LuckSDK]:{$message}";

@@ -95,22 +95,31 @@ class LuckHelper
     public function __construct($option)
     {
         //公众号设置的纳客接口地址
-        $this->interfaceUrl = $option['luck_url'];
+        if(!array_key_exists('luck_url', $option) || !$option['luck_url']) {
+            throw(new Exception('微少接口地址配置'));
+        }
+            $this->interfaceUrl = $option['luck_url'];
 
         //公众号设置的纳客接口密钥
+        if(!array_key_exists('luck_key', $option) || !$option['luck_key']) {
+            throw(new Exception('微少接口密钥配置'));
+        }
         $this->interfaceKey = $option['luck_key'];
 
         //获取设置的纳客接口版本
+        if(!array_key_exists('luck_version', $option) || !$option['luck_version']) {
+            throw(new Exception('微少对接会员系统版本配置'));
+        }
         $this->luckVersion = $option['luck_version'];
 
         //企业代码
-        if ($this->luckVersion == self::LUCK_VERSION_ENTERPRISE && empty($option['company_code'])) {
+        if ($this->luckVersion == self::LUCK_VERSION_ENTERPRISE && (!array_key_exists('company_code', $option) || !$option['company_code'])) {
             throw new Exception('', 50004);
         }
         $this->companyCode = $option['company_code'];
 
         //店铺号，针对商盟旗舰版
-        if ($this->luckVersion == self::LUCK_VERSION_ULTIMATE && empty($option['shop_id'])) {
+        if ($this->luckVersion == self::LUCK_VERSION_ULTIMATE && (!array_key_exists('shop_id', $option) || !$option['shop_id'])) {
             throw new Exception('', 50005);
         }
         $this->shopId = $option['shop_id'];
